@@ -1,5 +1,6 @@
+
 import React, { useState, useCallback } from 'react';
-import { Heart, BookOpen, Download, Eye, Clock, Star } from 'lucide-react';
+import { Heart, BookOpen, Star } from 'lucide-react';
 import { Book } from '@/types';
 import { useLibrary } from '@/contexts/LibraryContext';
 import { useToast } from '@/hooks/use-toast';
@@ -81,17 +82,6 @@ const CompactBookCard: React.FC<CompactBookCardProps> = ({
             priority="low"
           />
         )}
-        
-        {/* Overlay com título permanente */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/50">
-          <div className="absolute inset-0 flex items-center justify-center p-2">
-            <div className="text-center bg-black/80 backdrop-blur-sm rounded-lg p-2 border border-white/10 w-full mx-1">
-              <h3 className="text-white font-bold text-xs sm:text-sm leading-tight drop-shadow-xl line-clamp-2 tracking-wide">
-                {book.livro}
-              </h3>
-            </div>
-          </div>
-        </div>
         
         {/* Favorite Button Overlay */}
         <Button

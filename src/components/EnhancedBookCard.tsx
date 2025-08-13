@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { Heart, BookOpen, Download, Eye } from 'lucide-react';
 import { Book } from '@/types';
@@ -90,21 +91,6 @@ const EnhancedBookCard: React.FC<EnhancedBookCardProps> = ({
             priority="low"
           />
         )}
-        
-        {/* Overlay com título permanente */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30">
-          {/* Título centralizado na capa */}
-          <div className="absolute inset-0 flex items-center justify-center p-3">
-            <div className="text-center">
-              <h3 className="text-white font-bold text-xs sm:text-sm leading-tight drop-shadow-lg line-clamp-2 mb-1">
-                {book.livro}
-              </h3>
-              <p className="text-azure-accent text-xs font-medium drop-shadow-lg">
-                {book.area}
-              </p>
-            </div>
-          </div>
-        </div>
         
         {/* Hover overlay para ações */}
         <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

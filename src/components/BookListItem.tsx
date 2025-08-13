@@ -1,10 +1,9 @@
+
 import React, { useState, useCallback } from 'react';
-import { Heart, BookOpen, Download, Eye, Clock } from 'lucide-react';
+import { Heart, BookOpen } from 'lucide-react';
 import { Book } from '@/types';
 import { useLibrary } from '@/contexts/LibraryContext';
 import { useToast } from '@/hooks/use-toast';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import LazyImage from './LazyImage';
 
 interface BookListItemProps {

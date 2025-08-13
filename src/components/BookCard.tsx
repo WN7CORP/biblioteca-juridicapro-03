@@ -88,7 +88,7 @@ const BookCard: React.FC<BookCardProps> = memo(({ book, onClick, index = 0, prio
           </div>
         ) : (
           <>
-            {/* Capa ocupando 100% do espaço */}
+            {/* Capa ocupando 100% do espaço - SEM overlay de texto */}
             <LazyImage 
               src={book.imagem} 
               alt={book.livro}
@@ -96,21 +96,6 @@ const BookCard: React.FC<BookCardProps> = memo(({ book, onClick, index = 0, prio
               onError={handleImageError}
               priority={imagePriority}
             />
-            
-            {/* Overlay com título permanente e área - Mais nítido */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent">
-              {/* Título na parte inferior da capa */}
-              <div className="absolute bottom-0 left-0 right-0 p-3">
-                <div className="text-center bg-black/75 backdrop-blur-sm rounded-lg p-3 border border-white/15">
-                  <h3 className="text-white font-extrabold text-lg sm:text-xl lg:text-2xl leading-tight drop-shadow-2xl mb-2 line-clamp-2 tracking-wide">
-                    {book.livro}
-                  </h3>
-                  <p className="text-red-400 text-sm font-bold drop-shadow-lg bg-red-500/10 px-3 py-1 rounded-full border border-red-500/30">
-                    {book.area}
-                  </p>
-                </div>
-              </div>
-            </div>
           </>
         )}
         
