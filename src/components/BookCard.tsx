@@ -1,0 +1,177 @@
+
+import React, { useState, memo, useCallback } from 'react';
+import { Heart, Clock } from 'lucide-react';
+import { Book } from '@/types';
+import { useLibrary } from '@/contexts/LibraryContext';
+import LazyImage from './LazyImage';
+import { useToast } from '@/hooks/use-toast';
+
+interface BookCardProps {
+  book: Book & { isNew?: boolean };
+  onClick: () => void;
+  index?: number;
+  priority?: 'high' | 'normal' | 'low';
+}
+
+const BookCard: React.FC<BookCardProps> = memo(({ book, onClick, index = 0, priority }) => {
+  const { toggleFavorite } = useLibrary();
+  const { toast } = useToast();
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const handleFavoriteClick = useCallback(async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    try {
+      console.log('Favoriting book:', book.id, 'Current status:', book.favorito);
+      
+      // Set animation IMMEDIATELY before any async operations
+      setIsAnimating(true);
+      
+      // Haptic feedback for mobile devices
+      if ('vibrate' in navigator) {
+        navigator.vibrate(50);
+      }
+      
+      // Execute the favorite toggle (async)
+      const favoritePromise = toggleFavorite(book.id);
+      
+      // Show immediate feedback with toast
+      toast({
+        title: book.favorito ? "Removido dos favoritos" : "❤️ Adicionado aos favoritos",
+        description: book.livro,
+        duration: 2000,
+      });
+      
+      // Wait for the operation to complete
+      await favoritePromise;
+      
+      // Reset animation after fixed duration
+      setTimeout(() => setIsAnimating(false), 800);
+    } catch (error) {
+      console.error('Erro ao favoritar:', error);
+      setIsAnimating(false); // Reset animation on error
+      toast({
+        title: "Erro",
+        description: "Não foi possível atualizar favoritos. Tente novamente.",
+        variant: "destructive",
+        duration: 3000,
+      });
+    }
+  }, [book.id, book.favorito, book.livro, toggleFavorite, toast]);
+
+  const handleImageError = useCallback(() => {
+    setImageError(true);
+  }, []);
+
+  // Use provided priority or fallback to index-based priority
+  const imagePriority = priority || (index < 6 ? 'high' : index < 12 ? 'normal' : 'low');
+
+  return (
+    <div 
+      className="book-card relative bg-azure-card rounded-lg overflow-hidden cursor-pointer transform transition-smooth hover:scale-105 hover:shadow-xl hover:shadow-black/20 animate-fade-in group border border-azure-border hover:border-azure-accent h-full"
+      onClick={onClick}
+      style={{
+        animationDelay: `${index * 50}ms`,
+        animationFillMode: 'both'
+      }}
+    >
+      <div className="relative h-full">
+        {imageError ? (
+          <div className="w-full h-full bg-azure-cardHover flex items-center justify-center">
+            <div className="text-center p-4">
+              <div className="w-12 h-12 mx-auto mb-2 bg-azure-accent/20 rounded-full flex items-center justify-center">
+                <Heart size={24} className="text-azure-accent" />
+              </div>
+              <p className="text-xs text-azure-secondary">Capa não disponível</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* Capa ocupando 100% do espaço */}
+            <LazyImage 
+              src={book.imagem} 
+              alt={book.livro}
+              className="w-full h-full object-cover"
+              onError={handleImageError}
+              priority={imagePriority}
+            />
+            
+            {/* Overlay com título permanente e área - Mais nítido */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent">
+              {/* Título na parte inferior da capa */}
+              <div className="absolute bottom-0 left-0 right-0 p-3">
+                <div className="text-center bg-black/75 backdrop-blur-sm rounded-lg p-3 border border-white/15">
+                  <h3 className="text-white font-extrabold text-lg sm:text-xl lg:text-2xl leading-tight drop-shadow-2xl mb-2 line-clamp-2 tracking-wide">
+                    {book.livro}
+                  </h3>
+                  <p className="text-red-400 text-sm font-bold drop-shadow-lg bg-red-500/10 px-3 py-1 rounded-full border border-red-500/30">
+                    {book.area}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+        
+        <button
+          onClick={handleFavoriteClick}
+          className={`absolute top-3 right-3 p-2 rounded-full transition-bounce hover:scale-110 z-10 backdrop-blur-sm ${
+            book.favorito 
+              ? 'bg-red-500/90 animate-glow' 
+              : 'bg-black/50 hover:bg-black/70'
+          }`}
+          aria-label={book.favorito ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+        >
+          <Heart 
+            size={18} 
+            className={`transition-all duration-500 ${
+              book.favorito 
+                ? 'text-white fill-white' 
+                : 'text-white hover:text-red-400'
+            } ${
+              isAnimating 
+                ? 'animate-bounce scale-125' 
+                : ''
+            }`}
+            style={{
+              filter: isAnimating ? 'drop-shadow(0 0 12px rgba(239, 68, 68, 0.8))' : 'none'
+            }}
+          />
+          
+          {/* Enhanced Animation for Mobile */}
+           {isAnimating && (
+            <div className="absolute inset-0 rounded-full pointer-events-none">
+              <div className="absolute inset-0 rounded-full bg-red-500/40 animate-ping" />
+              <div className="absolute inset-0 rounded-full bg-red-500/30 animate-ping" style={{ animationDelay: '0.1s' }} />
+              <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping" style={{ animationDelay: '0.2s' }} />
+              <div className="absolute inset-0 rounded-full bg-red-500/10 animate-ping" style={{ animationDelay: '0.3s' }} />
+            </div>
+          )}
+        </button>
+        
+        {/* New indicator badge */}
+        {book.isNew && (
+          <div className="absolute top-3 left-3 bg-blue-500 text-xs text-white px-2 py-1 rounded-full flex items-center animate-float shadow-lg backdrop-blur-sm">
+            <Clock size={12} className="mr-1" />
+            Novo
+          </div>
+        )}
+
+        {/* Progress indicator if available */}
+        {book.progresso > 0 && (
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/20">
+            <div 
+              className="h-full bg-red-500 transition-all duration-300"
+              style={{ width: `${Math.min(book.progresso, 100)}%` }}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
+
+BookCard.displayName = 'BookCard';
+
+export default BookCard;
