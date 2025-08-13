@@ -10,9 +10,7 @@ const ReadBook = () => {
   const { books } = useLibrary();
   const navigate = useNavigate();
 
-  // Convert the string parameter to a number to match our updated Book type
   const numericBookId = bookId ? parseInt(bookId) : undefined;
-  
   const book = numericBookId ? books.find(b => b.id === numericBookId) : undefined;
 
   useEffect(() => {
@@ -25,22 +23,21 @@ const ReadBook = () => {
     return null;
   }
 
-  // Simplified back button handler that will definitely navigate back with one click
   const handleGoBack = () => {
     navigate('/');
   };
 
   return (
-    <div className="h-screen flex flex-col bg-black">
-      <div className="flex items-center bg-netflix-background py-3 px-4 shadow-md">
+    <div className="h-screen flex flex-col bg-purple-950">
+      <div className="flex items-center bg-purple-900 py-3 px-4 shadow-md border-b border-purple-700">
         <button
           onClick={handleGoBack}
-          className="flex items-center text-netflix-text hover:text-netflix-accent transition-colors"
+          className="flex items-center text-purple-100 hover:text-purple-300 transition-colors"
         >
           <ArrowLeft className="mr-2" size={20} />
           <span>Voltar</span>
         </button>
-        <h1 className="ml-4 text-sm font-medium truncate">{book.livro}</h1>
+        <h1 className="ml-4 text-sm font-medium truncate text-white">{book.livro}</h1>
       </div>
       
       <div className="flex-1 w-full">
