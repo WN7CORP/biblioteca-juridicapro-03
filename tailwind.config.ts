@@ -54,15 +54,15 @@ export default {
           foreground: "hsl(var(--card-foreground))"
         },
         azure: {
-          background: "hsl(0, 0%, 0%)",              /* Pure black */
-          card: "hsl(0, 0%, 0%)",                    /* Pure black cards */
-          cardHover: "hsl(0, 0%, 3%)",               /* Very dark hover */
-          accent: "hsl(0, 84%, 60%)",                /* Red accent */
-          accentHover: "hsl(0, 84%, 55%)",           /* Darker red accent */
-          text: "hsl(210, 40%, 98%)",                /* White text */
-          secondary: "hsl(215, 20%, 65%)",           /* Secondary text */
-          muted: "hsl(0, 0%, 3%)",                   /* Very dark muted */
-          border: "hsl(0, 0%, 10%)"                  /* Very dark borders */
+          background: "hsl(270, 20%, 8%)",            /* Roxo escuro */
+          card: "hsl(270, 15%, 12%)",                 /* Roxo escuro para cards */
+          cardHover: "hsl(270, 20%, 15%)",            /* Roxo hover */
+          accent: "hsl(280, 100%, 70%)",              /* Roxo vibrante */
+          accentHover: "hsl(280, 100%, 65%)",         /* Roxo vibrante hover */
+          text: "hsl(210, 40%, 98%)",                 /* Texto branco */
+          secondary: "hsl(260, 20%, 75%)",            /* Texto secundário roxo claro */
+          muted: "hsl(270, 15%, 10%)",                /* Roxo muito escuro */
+          border: "hsl(270, 15%, 18%)"                /* Bordas roxas escuras */
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -146,7 +146,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.6s ease-out",
-        "fade-out": "fade-out 0.3s ease-out",
+        "fade-out": "fade-out 0.3s ease-out",  
         "slide-up": "slide-up 0.4s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
         "shimmer": "shimmer 2s infinite linear",

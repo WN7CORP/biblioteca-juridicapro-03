@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo, useEffect } from 'react';
 import { useLibrary } from '@/contexts/LibraryContext';
 import { useLocation } from 'react-router-dom';
@@ -80,12 +81,12 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-azure-text">
+    <div className="min-h-screen bg-azure-background text-azure-text">
       {isMobile ? <MobileNav /> : <Header />}
       
-      <div className={`${isMobile ? 'pt-20 pb-4' : 'pt-20'}`}>
+      <div className={`${isMobile ? 'pt-4 pb-24' : 'pt-20'}`}>
         {/* Compact Header with Search */}
-        <div className="bg-black border-b border-azure-border">
+        <div className="bg-azure-background border-b border-azure-border">
           <div className="container mx-auto px-4 py-4">
             {/* Title and Stats Row */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
@@ -110,7 +111,7 @@ const Index = () => {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="bg-black border-b border-azure-border/50">
+        <div className="bg-azure-background border-b border-azure-border/50">
           <div className="container mx-auto px-4 py-3">
             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
               <Button

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Book, Note } from '../types';
-import { mockBooks, mockNotes } from '../data/mockData';
+import { mockNotes } from '../data/mockData';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -53,13 +53,13 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     getUniqueId();
   }, []);
 
-  // Fetch books from Supabase with better error handling
+  // Fetch books from biblioteca_classicos table
   const { data: books = [], isLoading, isError } = useQuery({
     queryKey: ['books'],
     queryFn: async () => {
       try {
         const { data, error } = await supabase
-          .from('biblioteca_juridica_duplicate')
+          .from('biblioteca_classicos')
           .select('*')
           .order('id', { ascending: true });
         
@@ -68,23 +68,23 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
           throw new Error(`Failed to fetch books: ${error.message}`);
         }
         
-        // Convert the data to match our Book interface with proper type conversion
+        // Convert the data to match our Book interface
         return data.map(book => ({
-          id: Number(book.id), // Ensure id is a number
+          id: Number(book.id),
           area: book.area || '',
           livro: book.livro || '',
           link: book.link || '',
-          imagem: book.imagem || '/placeholder.svg', // Use "imagem" column for book covers
+          imagem: book.imagem || '/placeholder.svg',
           sobre: book.sobre || '',
           download: book.download || '',
           favorito: false, // We'll set this based on user favorites
-          progresso: parseInt(book.progresso?.toString() || '0') || 0, // Convert progresso to number
+          progresso: parseInt(book.progresso?.toString() || '0') || 0,
           created_at: book.created_at || new Date().toISOString()
         })) as Book[];
       } catch (error) {
         console.error('Query error:', error);
-        // Return mock data as fallback
-        return mockBooks;
+        // Return empty array as fallback
+        return [];
       }
     },
     staleTime: 5 * 60 * 1000, // 5 minutes

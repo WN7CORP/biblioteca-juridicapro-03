@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,56 +11,56 @@
 
 @layer base {
   :root {
-    /* Pure Black Dark Theme */
-    --background: 0 0% 0%;                    /* Pure black background */
-    --foreground: 210 40% 98%;                /* White text */
+    /* Purple Dark Theme */
+    --background: 270 20% 8%;                    /* Roxo escuro */
+    --foreground: 210 40% 98%;                   /* Texto branco */
 
-    --card: 0 0% 0%;                          /* Pure black card background */
-    --card-foreground: 210 40% 98%;           /* White text on cards */
+    --card: 270 15% 12%;                         /* Roxo escuro para cards */
+    --card-foreground: 210 40% 98%;              /* Texto branco nos cards */
 
-    --popover: 0 0% 0%;                       /* Pure black popover */
-    --popover-foreground: 210 40% 98%;        /* White text */
+    --popover: 270 15% 12%;                      /* Roxo escuro para popover */
+    --popover-foreground: 210 40% 98%;           /* Texto branco */
 
-    --primary: 0 84% 60%;                     /* Red primary */
-    --primary-foreground: 210 40% 98%;        /* White text on primary */
+    --primary: 280 100% 70%;                     /* Roxo vibrante */
+    --primary-foreground: 210 40% 98%;           /* Texto branco no primário */
 
-    --secondary: 0 0% 5%;                     /* Very dark secondary */
-    --secondary-foreground: 210 40% 98%;      /* White text */
+    --secondary: 270 15% 15%;                    /* Roxo escuro secundário */
+    --secondary-foreground: 210 40% 98%;         /* Texto branco */
 
-    --muted: 0 0% 3%;                         /* Very dark muted */
-    --muted-foreground: 215 20% 65%;          /* Muted text */
+    --muted: 270 15% 10%;                        /* Roxo muito escuro */
+    --muted-foreground: 260 20% 75%;             /* Texto roxo claro */
 
-    --accent: 0 84% 60%;                      /* Red accent */
-    --accent-foreground: 210 40% 98%;         /* White text */
+    --accent: 280 100% 70%;                      /* Roxo vibrante */
+    --accent-foreground: 210 40% 98%;            /* Texto branco */
 
-    --destructive: 0 62.8% 30.6%;             /* Red destructive */
-    --destructive-foreground: 210 40% 98%;    /* White text */
+    --destructive: 0 62.8% 30.6%;                /* Vermelho destrutivo */
+    --destructive-foreground: 210 40% 98%;       /* Texto branco */
 
-    --border: 0 0% 10%;                       /* Very dark borders */
-    --input: 0 0% 5%;                         /* Very dark inputs */
-    --ring: 0 84% 60%;                       /* Red focus ring */
+    --border: 270 15% 18%;                       /* Bordas roxas escuras */
+    --input: 270 15% 15%;                        /* Inputs roxos escuros */
+    --ring: 280 100% 70%;                        /* Anel de foco roxo */
 
     --radius: 0.8rem;
     
-    /* Azure theme colors */
-    --azure-background: 0 0% 0%;              /* Pure black */
-    --azure-card: 0 0% 0%;                    /* Pure black cards */
-    --azure-cardHover: 0 0% 3%;               /* Very dark hover */
-    --azure-border: 0 0% 10%;                 /* Very dark borders */
-    --azure-muted: 0 0% 3%;                   /* Very dark muted */
-    --azure-text: 210 40% 98%;                /* White text */
-    --azure-secondary: 215 20% 65%;           /* Secondary text */
-    --azure-accent: 0 84% 60%;               /* Red accent */
-    --azure-accentHover: 0 84% 55%;          /* Darker red accent */
+    /* Azure theme colors updated to purple */
+    --azure-background: 270 20% 8%;              /* Roxo escuro */
+    --azure-card: 270 15% 12%;                   /* Cards roxos escuros */
+    --azure-cardHover: 270 20% 15%;              /* Hover roxo */
+    --azure-border: 270 15% 18%;                 /* Bordas roxas */
+    --azure-muted: 270 15% 10%;                  /* Roxo muito escuro */
+    --azure-text: 210 40% 98%;                   /* Texto branco */
+    --azure-secondary: 260 20% 75%;              /* Texto secundário roxo claro */
+    --azure-accent: 280 100% 70%;                /* Roxo vibrante */
+    --azure-accentHover: 280 100% 65%;           /* Roxo vibrante hover */
     
-    --sidebar-background: 0 0% 8%;
+    --sidebar-background: 270 15% 10%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 0 84% 60%;
+    --sidebar-primary: 280 100% 70%;
     --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent: 270 15% 15%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 0 84% 60%;
+    --sidebar-border: 270 15% 20%;
+    --sidebar-ring: 280 100% 70%;
   }
 }
 
@@ -68,7 +69,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-black text-azure-text;
+    @apply bg-azure-background text-azure-text;
   }
 }
 
@@ -78,7 +79,7 @@
 
 .book-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 25px rgba(128, 0, 128, 0.3);
 }
 
 .modal-overlay {
@@ -86,25 +87,25 @@
 }
 
 .mobile-nav {
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 -2px 10px rgba(128, 0, 128, 0.8);
 }
 
-/* Custom scrollbar - Pure Black Theme */
+/* Custom scrollbar - Purple Theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: hsl(270, 20%, 8%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1a1a1a;
+  background: hsl(270, 15%, 18%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(0, 84%, 60%);
+  background: hsl(280, 100%, 70%);
 }
 
 /* Hide scrollbar but keep functionality */
@@ -138,10 +139,10 @@
 
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 5px hsl(0, 84%, 60%, 0.5);
+    box-shadow: 0 0 5px hsl(280, 100%, 70%, 0.5);
   }
   50% {
-    box-shadow: 0 0 20px hsl(0, 84%, 60%, 0.8);
+    box-shadow: 0 0 20px hsl(280, 100%, 70%, 0.8);
   }
 }
 
@@ -225,7 +226,7 @@ img {
   
   .book-card:hover {
     transform: none !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(128, 0, 128, 0.5);
   }
   
   .book-card:active {
